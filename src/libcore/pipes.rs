@@ -1211,11 +1211,8 @@ pub trait Select2<T: Owned, U: Owned> {
     fn select() -> Either<T, U>;
 }
 
-impl<T: Owned, U: Owned,
-     Left: Selectable GenericPort<T>,
-     Right: Selectable GenericPort<U>>
-    (Left, Right): Select2<T, U> {
-
+impl<T: Owned, U: Owned, Left: Selectable GenericPort<T>, Right: Selectable GenericPort<U>>
+        Select2<T,U> for (Left, Right) {
     fn select() -> Either<T, U> {
         match self {
           (ref lp, ref rp) => match select2i(lp, rp) {
